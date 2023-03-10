@@ -1,12 +1,12 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document } from "mongoose";
 
-export type CatDocument = User & Document;
+export type AdminUserDataDocument = AdminUserData & Document;
 
 @Schema()
-export class User extends Document {
+export class AdminUserData extends Document {
     @Prop()
     authKeyHash: string;
 }
 
-export const CatSchema = SchemaFactory.createForClass(User);
+export const AdminUserDataSchema = SchemaFactory.createForClass(AdminUserData);
