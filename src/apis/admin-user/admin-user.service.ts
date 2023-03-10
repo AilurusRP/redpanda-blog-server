@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { AdminUserDataDocument } from 'src/schemas/user.schema';
+import { AdminUserData, AdminUserDataDocument } from 'src/schemas/admin-user.schema';
 
 @Injectable()
 export class AdminUserService {
@@ -9,10 +9,9 @@ export class AdminUserService {
   constructor(@InjectModel("admin_user") private adminUserDataModel: Model<AdminUserDataDocument>) {   
   }
 
-  async getAdminUserAuthKeyHash(): Promise<string | undefined> {
-    console.log(122222222)
-    const data = await this.adminUserDataModel.find();
+  async getAdminUserAuthKeyHash(): Promise<AdminUserData | undefined> {
+    const data = await this.adminUserDataModel.findOne();
     console.log(data)
-    return "kkkk"
+    return data;
   }
 }

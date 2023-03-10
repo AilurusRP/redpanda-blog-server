@@ -6,6 +6,9 @@ export type AdminUserDataDocument = AdminUserData & Document;
 @Schema()
 export class AdminUserData extends Document {
     @Prop()
+    uname: string;
+
+    @Prop()
     authKeyHash: string;
 }
 
