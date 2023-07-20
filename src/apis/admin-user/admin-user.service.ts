@@ -11,7 +11,6 @@ export class AdminUserService {
 
   async getAdminUserAuthKeyHash(): Promise<AdminUserData | undefined> {
     const data = await this.adminUserDataModel.findOne();
-    console.log(data)
     return data;
   }
 }

@@ -2,10 +2,11 @@ import { Controller, Get, Post, Request, UseGuards, UseInterceptors } from "@nes
 import { AuthGuard } from "@nestjs/passport";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { AppService } from "./app.service";
+import { AuthService } from "./auth/auth.service";
 
 @Controller()
 export class AppController {
-    constructor(private readonly appService: AppService) {}
+    constructor(private readonly appService: AppService, private readonly authService: AuthService) {}
 
     @Get()
     getHello(): string {
@@ -14,8 +15,8 @@ export class AppController {
 
     // form-data type doesn't work here.
     @UseGuards(AuthGuard("local"))
-    @Post("auth/login")
+    @Post("login")
     async login(@Request() req) {
-        return req.user;
+        return this.authService.login(req.user);
     }
 }

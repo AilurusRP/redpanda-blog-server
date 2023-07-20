@@ -14,6 +14,8 @@ export function createResponseData(res: Response, state: ResultTypes): ResponseD
     switch (state) {
         case ResultTypes.success:
             return new ResponseData(true);
+        case ResultTypes.authSuccess:
+            return new ResponseData(true, "Authentication Successful!")
 
         case ResultTypes.noValidKey:
             res.status(401);
@@ -24,9 +26,6 @@ export function createResponseData(res: Response, state: ResultTypes): ResponseD
         case ResultTypes.invalidDateFormat:
             res.status(422);
             return new ResponseData(false, "Invalid Date Format!");
-        case ResultTypes.invalidId:
-            res.status(422);
-            return new ResponseData(false, "Invalid Id!");
 
         case ResultTypes.unknownError:
             res.status(500);
