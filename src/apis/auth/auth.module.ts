@@ -4,17 +4,19 @@ import { AdminUserModule } from "../admin-user/admin-user.module";
 import { AuthService } from "./auth.service";
 import { LocalStrategy } from "./local.strategy";
 import { JwtModule } from "@nestjs/jwt";
+import config from "src/privConfig";
+import { JwtStrategy } from "./jwt.strategy";
 
 @Module({
     imports: [
         AdminUserModule,
         PassportModule,
         JwtModule.register({
-            secret: "jbwfeuegtrh",
-            signOptions: { expiresIn: "60s" },
+            secret: config.secret,
+            signOptions: { expiresIn: "7d" },
         }),
     ],
-    providers: [AuthService, LocalStrategy],
+    providers: [AuthService, LocalStrategy, JwtStrategy],
     exports: [AuthService],
 })
 export class AuthModule {}
